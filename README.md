@@ -39,3 +39,8 @@ Below are the links to any libraries or resources that were used for this homewo
 For additional functionality we've implemented react notifications using toastify. Whenever a user takes any sort of action like logging in, logging out, or anything related to songs they get a nice notification notififying them of their success or failure.
 
 Work distribution: 50/50
+
+![Picture1](image1.png)
+![Picture2](image2.png)
+![Picture3](image3.png)
+![Picture4](image4.png)
