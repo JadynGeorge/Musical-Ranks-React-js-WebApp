@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import { useLocation , useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import UpdateRatingForm from "./UpdateRatingForm.js";
 import StarRatingInput from "./StarRatingInput.js";
 import DeleteSongForm from "./DeleteSongForm.js";
@@ -21,7 +21,6 @@ import {
 import "bootstrap/dist/css/bootstrap.min.css";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 
 const Home = () => {
   //we have to make some variables such that we can operate around our ranking page
@@ -48,7 +47,7 @@ const Home = () => {
   const getcategory = async () => {
     try {
       const res = await fetch(
-        "http://localhost/dummyranks/index.php/song/showall"
+        "http://localhost/Musical-Ranks-React-js-WebApp/index.php/song/showall"
       );
       const getdata = await res.json();
       setCategory(getdata);
@@ -67,16 +66,15 @@ const Home = () => {
         localStorage.clear();
         navigate("/login");
         toast.success("You are logged out", {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: true,
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: true,
         });
-
       } else {
         toast.error("Logout Failed", {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: false,
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
         });
       }
     } catch (error) {
@@ -85,19 +83,19 @@ const Home = () => {
         position: "top-right",
         autoClose: 3000,
         hideProgressBar: false,
-        });
+      });
     }
   };
 
   const handleUpdateClick = (songId) => {
     setSongToUpdateId(songId);
     setIsOpen(true);
-  }
+  };
 
   const handleUpdateRating = async (newRating, songId) => {
     try {
       const response = await axios.post(
-        "http://localhost/dummyranks/index.php/song/update",
+        "http://localhost/Musical-Ranks-React-js-WebApp/index.php/song/update",
         {
           id: songId,
           rating: newRating,
@@ -107,25 +105,25 @@ const Home = () => {
       console.log(response);
       if (response.data.success) {
         toast.success(response.data.message, {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: false,
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
         });
 
         setIsOpen(false);
         getcategory();
-      } else if (response.data.warning){
+      } else if (response.data.warning) {
         toast.warning(response.data.warning, {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-      });
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+        });
       } else {
         toast.error(response.data.error, {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-      });
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+        });
       }
     } catch (error) {
       console.error("An error occurred:", error);
@@ -144,7 +142,7 @@ const Home = () => {
   const handleDeleteSong = async (songID) => {
     try {
       const response = await axios.post(
-        "http://localhost/dummyranks/index.php/song/delete",
+        "http://localhost/Musical-Ranks-React-js-WebApp/index.php/song/delete",
         {
           id: songID,
         }
@@ -152,17 +150,17 @@ const Home = () => {
       console.log("Delete response:", response);
       if (response.data.success) {
         toast.success(response.data.message, {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: false,
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
         });
         getcategory();
         setIsDeleteOpen(false);
       } else {
         toast.error(response.data.message, {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: false,
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
         });
       }
     } catch (error) {
@@ -171,50 +169,49 @@ const Home = () => {
         position: "top-right",
         autoClose: 3000,
         hideProgressBar: false,
-        });
+      });
     }
   };
 
   const handleCreateSong = async () => {
-    try{
-
+    try {
       console.log(newSongData);
-      const response = await axios
-        .post("http://localhost/dummyranks/index.php/song/create", newSongData);
+      const response = await axios.post(
+        "http://localhost/Musical-Ranks-React-js-WebApp/index.php/song/create",
+        newSongData
+      );
 
-        console.log(response);
-                 
-        if (response.data.success) {
-          console.log("Success message: ", response.data.message);
-          toast.success(response.data.message, {
+      console.log(response);
+
+      if (response.data.success) {
+        console.log("Success message: ", response.data.message);
+        toast.success(response.data.message, {
           position: "top-right",
           autoClose: 3000,
           hideProgressBar: false,
-          });
+        });
 
-          setIsCreateFormOpen(false);
-
-        }else if (response.data.warning) {
-          console.log("Warning message: ", response.data.message);
-          toast.warning(response.data.message, {
+        setIsCreateFormOpen(false);
+      } else if (response.data.warning) {
+        console.log("Warning message: ", response.data.message);
+        toast.warning(response.data.message, {
           position: "top-right",
           autoClose: 3000,
           hideProgressBar: false,
-          });
-          }else{
-            toast.error(response.data.message, {
-            position: "top-right",
-            autoClose: 3000,
-            hideProgressBar: false,
-            });
-          }
-          
-    }catch (error) {
+        });
+      } else {
+        toast.error(response.data.message, {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+        });
+      }
+    } catch (error) {
       console.error("An error occurred:", error);
       toast.error("An Error Occured", {
-      position: "top-right",
-      autoClose: 3000,
-      hideProgressBar: false,
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
       });
     }
   };
@@ -277,21 +274,25 @@ const Home = () => {
                       <td>
                         {category.username === location.state.username && (
                           <>
-                              <button href="" 
-                                    className="btn btn-success" 
-                                    onClick = {() => {
-                                        handleUpdateClick(category.id);
-                                        setIsOpen(true);
-                                    }}> 
-                                    <FontAwesomeIcon icon={faEdit} /> 
-                                    </button>
-                                    
-                                    {/* Including a pop uo form for the update button */}
-                                    <UpdateRatingForm
-                                    isOpen = {isOpen}
-                                    onClose={() => setIsOpen(false)}
-                                    onSubmit = {(newRating) => handleUpdateRating(newRating, songToUpdateId)}
-                                 />   
+                            <button
+                              href=""
+                              className="btn btn-success"
+                              onClick={() => {
+                                handleUpdateClick(category.id);
+                                setIsOpen(true);
+                              }}
+                            >
+                              <FontAwesomeIcon icon={faEdit} />
+                            </button>
+
+                            {/* Including a pop uo form for the update button */}
+                            <UpdateRatingForm
+                              isOpen={isOpen}
+                              onClose={() => setIsOpen(false)}
+                              onSubmit={(newRating) =>
+                                handleUpdateRating(newRating, songToUpdateId)
+                              }
+                            />
 
                             {/* Including pop up form for delete */}
                             <button
@@ -321,17 +322,17 @@ const Home = () => {
                           }}
                         >
                           {" "}
-                          <FontAwesomeIcon icon={faEye}  />{" "}
+                          <FontAwesomeIcon icon={faEye} />{" "}
                         </button>
                       </td>
                     </tr>
                   ))}
                 </tbody>
               </table>
-              </div>
+            </div>
 
-              {/* Implementing Creat Song Form */}
-               <div className="col-sm-3 mt-5">
+            {/* Implementing Creat Song Form */}
+            <div className="col-sm-3 mt-5">
               <button
                 href=""
                 className="btn btn-primary"
@@ -340,15 +341,20 @@ const Home = () => {
                 <FontAwesomeIcon icon={faPlusCircle} /> Create Song Rank
               </button>
 
-              
-
               {isCreateFormOpen && (
                 <div>
-                  <h2 className="text-primary">Welcome {location.state.username} ! </h2>
-                  <p className="text-light">Refresh page to see your new ranking!</p>
+                  <h2 className="text-primary">
+                    Welcome {location.state.username} !{" "}
+                  </h2>
+                  <p className="text-light">
+                    Refresh page to see your new ranking!
+                  </p>
                   <form>
                     <div className="form-group">
-                      <label className="text-white font-weight-bold"> Artist: </label>
+                      <label className="text-white font-weight-bold">
+                        {" "}
+                        Artist:{" "}
+                      </label>
                       <input
                         type="text"
                         value={newSongData.artist}
@@ -362,7 +368,9 @@ const Home = () => {
                       />
                     </div>
                     <div div className="form-group">
-                      <label className="text-white font-weight-bold">Song: </label>
+                      <label className="text-white font-weight-bold">
+                        Song:{" "}
+                      </label>
                       <input
                         type="text"
                         value={newSongData.song}
@@ -376,17 +384,23 @@ const Home = () => {
                       />
                     </div>
                     <div>
-                      <label className="text-white font-weight-bold"> Rating:</label>
+                      <label className="text-white font-weight-bold">
+                        {" "}
+                        Rating:
+                      </label>
 
                       <StarRatingInput
                         newRating={newRating}
-                        
-                                    setNewRating={setNewRating}
-                     
-                                    newSongData = {newSongData}
-                                    setNewSongData = {setNewSongData} />
+                        setNewRating={setNewRating}
+                        newSongData={newSongData}
+                        setNewSongData={setNewSongData}
+                      />
                     </div>
-                    <button type="button" onClick={handleCreateSong} className="btn btn-success">
+                    <button
+                      type="button"
+                      onClick={handleCreateSong}
+                      className="btn btn-success"
+                    >
                       Create
                     </button>
                   </form>

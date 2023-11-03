@@ -22,18 +22,24 @@ class UserController extends BaseController
     
             if (isset($data['username']) && isset($data['password']) && isset($data['confirm_password']) && $data['username'] !== null && $data['password'] !== null && $data['confirm_password'] !== null) {
             
-                if($this->userModel->createUser($data)){
+                if($this->userModel->isUsernameTaken($data['username'])){
+                    http_response_code(500);
+                    echo json_encode(["error" => "User creation failed. This username already exists"]);
+
+                }else{
+                    if($this->userModel->createUser($data)){
                     http_response_code(201);
                     echo json_encode(["success" => true, "message" => "User created successfully"]);
-                }
-                else{
+                    }else{
                     http_response_code(500);
                     echo json_encode(["error" => "User creation failed. Make sure passwords match!"]);
                 }
-            }else{
-                http_response_code(500);
-                echo json_encode(["error" => "One of more fields are empty"]);;
+            }}else{
+                    http_response_code(500);
+                    echo json_encode(["error" => "One of more fields are empty"]);;
+
             }
+            
 
         }
     }

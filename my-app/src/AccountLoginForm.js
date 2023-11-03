@@ -48,13 +48,13 @@ const AccountLoginForm = (options) => {
     if (options.formType === "login") {
       try {
         const response = await axios.post(
-          "http://localhost/dummyranks/index.php/user/login",
+          "http://localhost/Musical-Ranks-React-js-WebApp/index.php/user/login",
           {
             username: res.username,
             password: res.password,
           }
         );
-
+        console.log(response);
         if (response.status === 200) {
           setLogin(true);
           toast.success("You are logged in!", {
