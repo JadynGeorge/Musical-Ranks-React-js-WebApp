@@ -344,6 +344,7 @@ const Home = () => {
 
               {isCreateFormOpen && (
                 <div>
+                  <h2 className="text-primary">Welcome {location.state.username} ! </h2>
                   <p className="text-light">Refresh page to see your new ranking!</p>
                   <form>
                     <div className="form-group">
