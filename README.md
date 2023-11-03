@@ -1,5 +1,7 @@
 # Musical-Ranks-React-js-WebApp
 
+**PLEASE MAKE NOTE: depending on how you clone the repository this may affect how things run, specifically with the axios requests. Instances of this are seen most obviously in the Home.js file. Right now the path is set to a specific folder name, but this may vary. Ensure when testing that the path is correct.**
+
 MusicalRanks is a web application that allows users to share their musical tastes and thoughts. Listeners from across the platform can not only rank their personal tastes of music, but they can upvote/downvote the rankings of their fellow users!
 
 # What is our goal?
