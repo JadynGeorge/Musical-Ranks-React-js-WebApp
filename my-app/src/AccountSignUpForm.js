@@ -54,7 +54,7 @@ const AccountSignUpForm = (options) => {
     try {
       if (options.formType === "register") {
         const response = await axios.post(
-          "http://localhost/dummyranks/index.php/user/create",
+          "http://localhost/Musical-Ranks-React-js-WebApp/index.php/user/create",
           {
             username: res.username,
             password: res.password,

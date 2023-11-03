@@ -12,12 +12,14 @@ and back-end of our app. Our app still has the main features that it prides itse
 In order to set up and run the app you should start by installing and running the app XAMPP and running MySQL and Apache by clicking "Start" in the XAMPP Control Panel. You should clone the github repository into the htdocs folder inside of XAMPP. Open a terminal and make your way into the folder containing the app. Ensure that you have node.js installed. Now cd into the my-app folder and in here is where we have to download all our dependencies. You should download the following:
 
 - npm i react-modal
+- npm i bootstrap
 - npm i react-reactor-dom
 - npm i react-axios
 - npm i react-bootstrap
 - npm i --save @fortawesome/fontawesome-svg-core
 - npm i --save @fortawesome/free-solid-svg-icons
 - npm i --save @fortawesome/free-regular-svg-icons
+- npm i @fortawesome/react-fontawesome
 - npm i react-toastify
 
 Now you should be able run the app, but we also have to set up our local databases. Type "localhost/myphpadmin" into your browser and create two tables named ratings and users under the database name music_db. You can follow the pictures attached below to make your two databases. If the pictures are not loading in the ReadME file, they are in the folder titled read.me-pics.
