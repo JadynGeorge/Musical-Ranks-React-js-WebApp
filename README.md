@@ -13,7 +13,7 @@ In order to set up and run the app you should start by installing and running th
 
 - npm i react-modal
 - npm i bootstrap
-- npm i react-reactor-dom
+- npm i react-router-dom
 - npm i react-axios
 - npm i react-bootstrap
 - npm i --save @fortawesome/fontawesome-svg-core
