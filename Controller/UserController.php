@@ -23,19 +23,19 @@ class UserController extends BaseController
             if (isset($data['username']) && isset($data['password']) && isset($data['confirm_password']) && $data['username'] !== null && $data['password'] !== null && $data['confirm_password'] !== null) {
             
                 if($this->userModel->isUsernameTaken($data['username'])){
-                    http_response_code(500);
+                    //http_response_code(409);
                     echo json_encode(["error" => "User creation failed. This username already exists"]);
 
                 }else{
                     if($this->userModel->createUser($data)){
-                    http_response_code(201);
+                   // http_response_code(201);
                     echo json_encode(["success" => true, "message" => "User created successfully"]);
                     }else{
-                    http_response_code(500);
+                    //http_response_code(401);
                     echo json_encode(["error" => "User creation failed. Make sure passwords match!"]);
                 }
             }}else{
-                    http_response_code(500);
+                    //http_response_code(204);
                     echo json_encode(["error" => "One of more fields are empty"]);;
 
             }
@@ -59,33 +59,34 @@ class UserController extends BaseController
                     
                     if (is_array($responseData) && isset($responseData['success'])) {
                         if($responseData['success']){
-                            echo 'User Logged In';
+                            echo json_encode(["success" => true, "message" => "User created successfully"]);
+                            //echo 'User Logged In';
                         }else{
                             if (isset($responseData['message'])){
-                                http_response_code(401);
-                                echo $responseData['message'];
+                                echo json_encode(["error" => $responseData["message"]]);
+
                             }
                             else{
-                                http_response_code(401);
-                                echo "Login failed";
+                                echo json_encode(["error" => $responseData["message"]]);
                             }
                         }                        
                     }else{
-                            http_response_code(502);
-                            echo "Invalid response from UserModel";
+                            //http_response_code(502);
+                            echo json_encode(["error" => "Invalid response from UserModel"]);
+
                         }
                     // the request was processed properly and we return true from the model
                     }else{
-                        http_response_code(401);
-                        echo 'Username does not exist';
+                        echo json_encode(["error" => "User creation failed. This username does not exist"]);
                         //something failed with the request
                     }
                 }else {
-                    http_response_code(204);
-                    echo 'Data is not valid might be empty';
+                    echo json_encode(["error" => 'Data is not valid, might be empty']);
+
                 }
             }else{
-                echo 'Something went wrong in the UserController';
+                echo json_encode(["error" => "Something went wrong in the controller"]);
+
             }
         }
     
